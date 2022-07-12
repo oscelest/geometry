@@ -1,4 +1,4 @@
-import Point, {SimplePoint} from "./Point";
+import {SimplePoint} from "./Point";
 
 export default class Rect {
 
@@ -28,7 +28,7 @@ export default class Rect {
     return new Rect(this.x, this.y, this.width, this.height);
   }
 
-  public static fromPoints(point_1: Point, point_2: Point) {
+  public static fromPoints(point_1: SimplePoint, point_2: SimplePoint) {
     const x1 = Math.min(point_1.x, point_2.x);
     const x2 = Math.max(point_1.x, point_2.x);
     const y1 = Math.min(point_1.y, point_2.y);
@@ -40,11 +40,11 @@ export default class Rect {
     return new Rect(rect.x, rect.y, rect.width, rect.height);
   }
 
-  public containsPoint(point: Point) {
+  public containsPoint(point: SimplePoint) {
     return !(this.left >= point.x || this.right <= point.x || this.top >= point.y || this.bottom <= point.y);
   }
 
-  public static containsPoint(source: SimpleRect, target: Point) {
+  public static containsPoint(source: SimpleRect, target: SimplePoint) {
     return new Rect(source.x, source.y, source.width, source.height).containsPoint(target);
   }
 

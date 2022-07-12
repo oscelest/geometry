@@ -1,4 +1,4 @@
-import Rect, {SimpleRect} from "./Rect";
+import {SimpleRect} from "./Rect";
 
 export default class Point {
 
