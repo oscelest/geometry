@@ -10,8 +10,8 @@ export default class Circle {
     this.radius = radius;
   }
 
-  public static fromSimpleCircle(circle: SimpleCircle) {
-    return new Circle(circle.origin, circle.radius);
+  public static fromSimpleCircle(source: SimpleCircle) {
+    return new Circle(source.origin, source.radius);
   }
 
   public static getDiameter(source: SimpleCircle) {
@@ -22,8 +22,8 @@ export default class Circle {
     return this.fromSimpleCircle(source).getArea();
   }
 
-  public static containsPoint(source: SimpleCircle, point: SimplePoint) {
-    return this.fromSimpleCircle(source).containsPoint(point);
+  public static containsPoint(source: SimpleCircle, target: SimplePoint) {
+    return this.fromSimpleCircle(source).containsPoint(target);
   }
 
   public clone() {

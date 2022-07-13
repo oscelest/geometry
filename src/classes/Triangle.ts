@@ -13,8 +13,8 @@ export default class Triangle {
     this.c = Point.fromSimplePoint(c);
   }
 
-  public static fromSimpleTriangle(line: SimpleTriangle) {
-    return new Triangle(line.a, line.b, line.c);
+  public static fromSimpleTriangle(source: SimpleTriangle) {
+    return new Triangle(source.a, source.b, source.c);
   }
 
   public static getAngleAInRadians(source: SimpleTriangle) {

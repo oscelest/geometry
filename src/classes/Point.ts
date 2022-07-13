@@ -10,8 +10,8 @@ export default class Point {
     this.y = y;
   }
 
-  public static fromSimplePoint(point: SimplePoint) {
-    return new this(point.x, point.y);
+  public static fromSimplePoint(source: SimplePoint) {
+    return new this(source.x, source.y);
   }
 
   public static getMagnitude(source: SimplePoint, target: SimplePoint) {

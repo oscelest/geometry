@@ -8,15 +8,15 @@ export default class Quadrilateral {
   public c: Point;
   public d: Point;
 
-  constructor(top_left: SimplePoint, top_right: SimplePoint, bottom_left: SimplePoint, bottom_right: SimplePoint) {
-    this.a = Point.fromSimplePoint(top_left);
-    this.b = Point.fromSimplePoint(top_right);
-    this.c = Point.fromSimplePoint(bottom_left);
-    this.d = Point.fromSimplePoint(bottom_right);
+  constructor(a: SimplePoint, b: SimplePoint, c: SimplePoint, d: SimplePoint) {
+    this.a = Point.fromSimplePoint(a);
+    this.b = Point.fromSimplePoint(b);
+    this.c = Point.fromSimplePoint(c);
+    this.d = Point.fromSimplePoint(d);
   }
 
-  public static fromSimpleQuadrilateral(quadrilateral: SimpleQuadrilateral) {
-    return new this(quadrilateral.top_left, quadrilateral.top_right, quadrilateral.bottom_left, quadrilateral.bottom_right);
+  public static fromSimpleQuadrilateral(source: SimpleQuadrilateral) {
+    return new this(source.top_left, source.top_right, source.bottom_left, source.bottom_right);
   }
 
   public static getArea(source: SimpleQuadrilateral) {

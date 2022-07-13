@@ -10,8 +10,8 @@ export default class Line {
     this.b = b;
   }
 
-  public static fromSimpleLine(line: SimpleLine) {
-    return new this(line.a, line.b);
+  public static fromSimpleLine(source: SimpleLine) {
+    return new this(source.a, source.b);
   }
 
   public static getFormula(source: SimpleLine) {

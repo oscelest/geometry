@@ -24,15 +24,15 @@ export default class Rect {
     this.bottom = y + height;
   }
 
-  public static fromSimpleRect(rect: SimpleRect) {
-    return new this(rect.x, rect.y, rect.width, rect.height);
+  public static fromSimpleRect(source: SimpleRect) {
+    return new this(source.x, source.y, source.width, source.height);
   }
 
-  public static fromPoints(point_1: SimplePoint, point_2: SimplePoint) {
-    const x1 = Math.min(point_1.x, point_2.x);
-    const x2 = Math.max(point_1.x, point_2.x);
-    const y1 = Math.min(point_1.y, point_2.y);
-    const y2 = Math.max(point_1.y, point_2.y);
+  public static fromPoints(p1: SimplePoint, p2: SimplePoint) {
+    const x1 = Math.min(p1.x, p1.x);
+    const x2 = Math.max(p1.x, p1.x);
+    const y1 = Math.min(p1.y, p1.y);
+    const y2 = Math.max(p1.y, p1.y);
     return new this(x1, y1, x2 - x1, y2 - y1);
   }
 
