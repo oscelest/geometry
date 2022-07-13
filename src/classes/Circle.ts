@@ -22,12 +22,24 @@ export default class Circle {
     return this.fromSimpleCircle(source).getArea();
   }
 
+  public static containsPoint(source: SimpleCircle, point: SimplePoint) {
+    return this.fromSimpleCircle(source).containsPoint(point);
+  }
+
+  public clone() {
+    return new Circle(this.origin, this.radius);
+  }
+
   public getDiameter() {
     return this.radius * 2;
   }
 
   public getArea() {
     return this.radius * this.radius * Math.PI;
+  }
+
+  public containsPoint(point: SimplePoint) {
+    return this.origin.getDistanceToPoint(point) <= this.radius;
   }
 }
 
