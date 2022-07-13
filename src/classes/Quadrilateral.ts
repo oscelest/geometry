@@ -1,29 +1,18 @@
 import Point, {SimplePoint} from "./Point";
-import Line from "./Line";
 import Triangle from "./Triangle";
 
 export default class Quadrilateral {
 
-  public top_left: Point;
-  public top_right: Point;
-  public bottom_left: Point;
-  public bottom_right: Point;
-
-  public top: Line;
-  public left: Line;
-  public right: Line;
-  public bottom: Line;
+  public a: Point;
+  public b: Point;
+  public c: Point;
+  public d: Point;
 
   constructor(top_left: SimplePoint, top_right: SimplePoint, bottom_left: SimplePoint, bottom_right: SimplePoint) {
-    this.top_left = Point.fromSimplePoint(top_left);
-    this.top_right = Point.fromSimplePoint(top_right);
-    this.bottom_left = Point.fromSimplePoint(bottom_left);
-    this.bottom_right = Point.fromSimplePoint(bottom_right);
-
-    this.top = new Line(top_left, top_right);
-    this.left = new Line(top_left, bottom_left);
-    this.right = new Line(top_right, bottom_right);
-    this.bottom = new Line(bottom_left, bottom_right);
+    this.a = Point.fromSimplePoint(top_left);
+    this.b = Point.fromSimplePoint(top_right);
+    this.c = Point.fromSimplePoint(bottom_left);
+    this.d = Point.fromSimplePoint(bottom_right);
   }
 
   public static fromSimpleQuadrilateral(quadrilateral: SimpleQuadrilateral) {
@@ -39,19 +28,19 @@ export default class Quadrilateral {
   }
 
   public clone() {
-    return new Quadrilateral(this.top_left, this.top_right, this.bottom_left, this.bottom_right);
+    return new Quadrilateral(this.a, this.b, this.c, this.d);
   }
 
   public getArea() {
-    return new Triangle(this.top_left, this.top_right, this.bottom_right).getArea() + new Triangle(this.top_left, this.bottom_left, this.bottom_right).getArea();
+    return new Triangle(this.a, this.b, this.d).getArea() + new Triangle(this.a, this.c, this.d).getArea();
   }
 
   public containsPoint(point: SimplePoint) {
     const point_area = Math.round(
-      new Triangle(point, this.top_left, this.top_right).getArea() +
-      new Triangle(point, this.top_left, this.bottom_left).getArea() +
-      new Triangle(point, this.top_right, this.bottom_right).getArea() +
-      new Triangle(point, this.bottom_left, this.bottom_right).getArea()
+      new Triangle(point, this.a, this.b).getArea() +
+      new Triangle(point, this.a, this.c).getArea() +
+      new Triangle(point, this.b, this.d).getArea() +
+      new Triangle(point, this.c, this.d).getArea()
     );
 
     return Math.round(this.getArea()) === point_area;
