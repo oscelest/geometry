@@ -24,10 +24,6 @@ export default class Rect {
     this.bottom = y + height;
   }
 
-  public clone() {
-    return new Rect(this.x, this.y, this.width, this.height);
-  }
-
   public static fromSimpleRect(rect: SimpleRect) {
     return new this(rect.x, rect.y, rect.width, rect.height);
   }
@@ -40,36 +36,71 @@ export default class Rect {
     return new this(x1, y1, x2 - x1, y2 - y1);
   }
 
-  public getArea() {
-    return this.width * this.height;
-  }
-
   public static getArea(source: SimpleRect) {
     return this.fromSimpleRect(source);
-  }
-
-  public containsPoint(point: SimplePoint) {
-    return !(this.left >= point.x || this.right <= point.x || this.top >= point.y || this.bottom <= point.y);
   }
 
   public static containsPoint(source: SimpleRect, target: SimplePoint) {
     return this.fromSimpleRect(source).containsPoint(target);
   }
 
-  public containsRect(rect: SimpleRect) {
-    return !(this.left < rect.x || this.top < rect.y || this.right > rect.x + rect.height || this.bottom > rect.y + rect.height);
-  }
-
   public static containsRect(source: SimpleRect, target: SimpleRect) {
     return this.fromSimpleRect(source).containsRect(target);
   }
 
-  public intersectsRect(rect: SimpleRect) {
-    return !(this.left >= rect.x + rect.height  || this.right <= rect.x || this.top >= rect.y + rect.height || this.bottom <= rect.y);
-  }
-
   public static intersectsRect(source: SimpleRect, target: SimpleRect) {
     return this.fromSimpleRect(source).intersectsRect(target);
+  }
+
+  public static translateX(source: SimpleRect, x: number) {
+    return this.fromSimpleRect(source).translateX(x);
+  }
+
+  public static translateY(source: SimpleRect, y: number) {
+    return this.fromSimpleRect(source).translateY(y);
+  }
+
+  public static translateByCoords(source: SimpleRect, x: number, y: number) {
+    return this.fromSimpleRect(source).translateByCoords(x, y);
+  }
+
+  public static translateByPoint(source: SimpleRect, target: SimplePoint) {
+    return this.fromSimpleRect(source).translateByPoint(target);
+  }
+
+  public static scale(source: SimpleRect, decimal_percent: number) {
+    return this.fromSimpleRect(source).scale(decimal_percent);
+  }
+
+  public static union(...rect_list: SimpleRect[]) {
+    if (rect_list.length < 1) throw new Error("Cannot create union of Rects from empty list.");
+
+    const x1 = Math.min(...rect_list.map(v => v.x));
+    const y1 = Math.min(...rect_list.map(v => v.y));
+    const x2 = Math.max(...rect_list.map(v => v.x + v.width));
+    const y2 = Math.max(...rect_list.map(v => v.y + v.height));
+
+    return new this(x1, y1, x2 - x1, y2 - y1);
+  }
+
+  public clone() {
+    return new Rect(this.x, this.y, this.width, this.height);
+  }
+
+  public getArea() {
+    return this.width * this.height;
+  }
+
+  public containsPoint(point: SimplePoint) {
+    return !(this.left >= point.x || this.right <= point.x || this.top >= point.y || this.bottom <= point.y);
+  }
+
+  public containsRect(rect: SimpleRect) {
+    return !(this.left < rect.x || this.top < rect.y || this.right > rect.x + rect.height || this.bottom > rect.y + rect.height);
+  }
+
+  public intersectsRect(rect: SimpleRect) {
+    return !(this.left >= rect.x + rect.height || this.right <= rect.x || this.top >= rect.y + rect.height || this.bottom <= rect.y);
   }
 
   public translateX(x: number) {
@@ -77,17 +108,9 @@ export default class Rect {
     return this;
   }
 
-  public static translateX(source: SimpleRect, x: number) {
-    return this.fromSimpleRect(source).translateX(x);
-  }
-
   public translateY(y: number) {
     this.y += y;
     return this;
-  }
-
-  public static translateY(source: SimpleRect, y: number) {
-    return this.fromSimpleRect(source).translateY(y);
   }
 
   public translateByCoords(x: number, y: number) {
@@ -96,16 +119,8 @@ export default class Rect {
     return this;
   }
 
-  public static translateByCoords(source: SimpleRect, x: number, y: number) {
-    return this.fromSimpleRect(source).translateByCoords(x, y);
-  }
-
   public translateByPoint(point: SimplePoint) {
     return this.translateByCoords(point.x, point.y);
-  }
-
-  public static translateByPoint(source: SimpleRect, target: SimplePoint) {
-    return this.fromSimpleRect(source).translateByPoint(target);
   }
 
   public scale(decimal_percent: number) {
@@ -117,10 +132,6 @@ export default class Rect {
     this.width -= dx;
     this.height -= dy;
     return this;
-  }
-
-  public static scale(source: SimpleRect, decimal_percent: number) {
-    return this.fromSimpleRect(source).scale(decimal_percent);
   }
 
   public union(...rect_list: SimpleRect[]) {
@@ -140,18 +151,6 @@ export default class Rect {
     }
     return this;
   }
-
-  public static union(...rect_list: SimpleRect[]) {
-    if (rect_list.length < 1) throw new Error("Cannot create union of Rects from empty list.");
-
-    const x1 = Math.min(...rect_list.map(v => v.x));
-    const y1 = Math.min(...rect_list.map(v => v.y));
-    const x2 = Math.max(...rect_list.map(v => v.x + v.width));
-    const y2 = Math.max(...rect_list.map(v => v.y + v.height));
-
-    return new this(x1, y1, x2 - x1, y2 - y1);
-  }
-
 }
 
 export interface SimpleRect {

@@ -1,10 +1,12 @@
+import Point, {SimplePoint} from "./Point";
+
 export default class Circle {
 
-  public origin: number;
+  public origin: Point;
   public radius: number;
 
-  constructor(origin: number, radius: number) {
-    this.origin = origin;
+  constructor(origin: SimplePoint, radius: number) {
+    this.origin = Point.fromSimplePoint(origin);
     this.radius = radius;
   }
 
@@ -12,25 +14,24 @@ export default class Circle {
     return new Circle(circle.origin, circle.radius);
   }
 
-  public getDiameter() {
-    return this.radius * 2;
+  public static getDiameter(source: SimpleCircle) {
+    return this.fromSimpleCircle(source).getDiameter();
   }
 
-  public static getDiameter(source: SimpleCircle) {
-    return this.fromSimpleCircle(source).getDiameter()
+  public static getArea(source: SimpleCircle) {
+    return this.fromSimpleCircle(source).getArea();
+  }
+
+  public getDiameter() {
+    return this.radius * 2;
   }
 
   public getArea() {
     return this.radius * this.radius * Math.PI;
   }
-
-  public static getArea(source: SimpleCircle) {
-    return this.fromSimpleCircle(source).getArea()
-  }
-
 }
 
 export interface SimpleCircle {
-  origin: number;
+  origin: SimplePoint;
   radius: number;
 }

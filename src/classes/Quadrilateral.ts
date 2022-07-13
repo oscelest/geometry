@@ -30,16 +30,20 @@ export default class Quadrilateral {
     return new this(quadrilateral.top_left, quadrilateral.top_right, quadrilateral.bottom_left, quadrilateral.bottom_right);
   }
 
+  public static getArea(source: SimpleQuadrilateral) {
+    return this.fromSimpleQuadrilateral(source).getArea();
+  }
+
+  public static containsPoint(source: SimpleQuadrilateral, target: SimplePoint) {
+    return this.fromSimpleQuadrilateral(source).containsPoint(target);
+  }
+
   public clone() {
     return new Quadrilateral(this.top_left, this.top_right, this.bottom_left, this.bottom_right);
   }
 
   public getArea() {
     return new Triangle(this.top_left, this.top_right, this.bottom_right).getArea() + new Triangle(this.top_left, this.bottom_left, this.bottom_right).getArea();
-  }
-
-  public static getArea(source: SimpleQuadrilateral) {
-    return this.fromSimpleQuadrilateral(source).getArea();
   }
 
   public containsPoint(point: SimplePoint) {
@@ -51,10 +55,6 @@ export default class Quadrilateral {
     );
 
     return Math.round(this.getArea()) === point_area;
-  }
-
-  public static containsPoint(source: SimpleQuadrilateral, target: SimplePoint) {
-    return this.fromSimpleQuadrilateral(source).containsPoint(target);
   }
 }
 
