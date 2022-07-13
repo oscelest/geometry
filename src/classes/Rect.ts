@@ -28,16 +28,24 @@ export default class Rect {
     return new Rect(this.x, this.y, this.width, this.height);
   }
 
+  public static fromSimpleRect(rect: SimpleRect) {
+    return new this(rect.x, rect.y, rect.width, rect.height);
+  }
+
   public static fromPoints(point_1: SimplePoint, point_2: SimplePoint) {
     const x1 = Math.min(point_1.x, point_2.x);
     const x2 = Math.max(point_1.x, point_2.x);
     const y1 = Math.min(point_1.y, point_2.y);
     const y2 = Math.max(point_1.y, point_2.y);
-    return new Rect(x1, y1, x2 - x1, y2 - y1);
+    return new this(x1, y1, x2 - x1, y2 - y1);
   }
 
-  public static fromSimpleRect(rect: SimpleRect) {
-    return new Rect(rect.x, rect.y, rect.width, rect.height);
+  public getArea() {
+    return this.width * this.height;
+  }
+
+  public static getArea(source: SimpleRect) {
+    return this.fromSimpleRect(source);
   }
 
   public containsPoint(point: SimplePoint) {
@@ -45,7 +53,7 @@ export default class Rect {
   }
 
   public static containsPoint(source: SimpleRect, target: SimplePoint) {
-    return new Rect(source.x, source.y, source.width, source.height).containsPoint(target);
+    return this.fromSimpleRect(source).containsPoint(target);
   }
 
   public containsRect(rect: SimpleRect) {
@@ -53,7 +61,7 @@ export default class Rect {
   }
 
   public static containsRect(source: SimpleRect, target: SimpleRect) {
-    return new Rect(source.x, source.y, source.width, source.height).containsRect(target);
+    return this.fromSimpleRect(source).containsRect(target);
   }
 
   public intersectsRect(rect: SimpleRect) {
@@ -61,7 +69,7 @@ export default class Rect {
   }
 
   public static intersectsRect(source: SimpleRect, target: SimpleRect) {
-    return new Rect(source.x, source.y, source.width, source.height).intersectsRect(target);
+    return this.fromSimpleRect(source).intersectsRect(target);
   }
 
   public translateX(x: number) {
@@ -70,7 +78,7 @@ export default class Rect {
   }
 
   public static translateX(source: SimpleRect, x: number) {
-    return new Rect(source.x, source.y, source.width, source.height).translateX(x);
+    return this.fromSimpleRect(source).translateX(x);
   }
 
   public translateY(y: number) {
@@ -79,7 +87,7 @@ export default class Rect {
   }
 
   public static translateY(source: SimpleRect, y: number) {
-    return new Rect(source.x, source.y, source.width, source.height).translateY(y);
+    return this.fromSimpleRect(source).translateY(y);
   }
 
   public translateByCoords(x: number, y: number) {
@@ -89,7 +97,7 @@ export default class Rect {
   }
 
   public static translateByCoords(source: SimpleRect, x: number, y: number) {
-    return new Rect(source.x, source.y, source.width, source.height).translateByCoords(x, y);
+    return this.fromSimpleRect(source).translateByCoords(x, y);
   }
 
   public translateByPoint(point: SimplePoint) {
@@ -97,7 +105,7 @@ export default class Rect {
   }
 
   public static translateByPoint(source: SimpleRect, target: SimplePoint) {
-    return new Rect(source.x, source.y, source.width, source.height).translateByPoint(target);
+    return this.fromSimpleRect(source).translateByPoint(target);
   }
 
   public scale(decimal_percent: number) {
@@ -112,7 +120,7 @@ export default class Rect {
   }
 
   public static scale(source: SimpleRect, decimal_percent: number) {
-    return new Rect(source.x, source.y, source.width, source.height).scale(decimal_percent);
+    return this.fromSimpleRect(source).scale(decimal_percent);
   }
 
   public union(...rect_list: SimpleRect[]) {
@@ -141,7 +149,7 @@ export default class Rect {
     const x2 = Math.max(...rect_list.map(v => v.x + v.width));
     const y2 = Math.max(...rect_list.map(v => v.y + v.height));
 
-    return new Rect(x1, y1, x2 - x1, y2 - y1);
+    return new this(x1, y1, x2 - x1, y2 - y1);
   }
 
 }
