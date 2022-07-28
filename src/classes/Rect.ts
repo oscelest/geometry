@@ -29,10 +29,10 @@ export default class Rect {
   }
 
   public static fromPoints(p1: SimplePoint, p2: SimplePoint) {
-    const x1 = Math.min(p1.x, p1.x);
-    const x2 = Math.max(p1.x, p1.x);
-    const y1 = Math.min(p1.y, p1.y);
-    const y2 = Math.max(p1.y, p1.y);
+    const x1 = Math.min(p1.x, p2.x);
+    const x2 = Math.max(p1.x, p2.x);
+    const y1 = Math.min(p1.y, p2.y);
+    const y2 = Math.max(p1.y, p2.y);
     return new this(x1, y1, x2 - x1, y2 - y1);
   }
 
@@ -136,7 +136,7 @@ export default class Rect {
 
   public union(...rect_list: SimpleRect[]) {
     for (let i = 0; i < rect_list.length; i++) {
-      const rect = rect_list.at(i);
+      const rect = rect_list[i];
       if (!rect) continue;
 
       const x1 = Math.min(this.x, rect.x);
