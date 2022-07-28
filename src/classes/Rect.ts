@@ -100,7 +100,7 @@ export default class Rect {
   }
 
   public intersectsRect(rect: SimpleRect) {
-    return !(this.left >= rect.x + rect.height || this.right <= rect.x || this.top >= rect.y + rect.height || this.bottom <= rect.y);
+    return !(this.left >= rect.x + rect.width || this.right <= rect.x || this.top >= rect.y + rect.height || this.bottom <= rect.y);
   }
 
   public translateX(x: number) {
