@@ -7,21 +7,11 @@ export default class Rect {
   public width: number;
   public height: number;
 
-  public top: number;
-  public left: number;
-  public right: number;
-  public bottom: number;
-
   constructor(x: number, y: number, width: number, height: number) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-
-    this.top = y;
-    this.left = x;
-    this.right = x + width;
-    this.bottom = y + height;
   }
 
   public static fromSimpleRect(source: SimpleRect) {
@@ -92,15 +82,15 @@ export default class Rect {
   }
 
   public containsPoint(point: SimplePoint) {
-    return !(this.left >= point.x || this.right <= point.x || this.top >= point.y || this.bottom <= point.y);
+    return !(this.x >= point.x || this.x + this.width <= point.x || this.y >= point.y || this.y + this.height <= point.y);
   }
 
   public containsRect(rect: SimpleRect) {
-    return !(this.left < rect.x || this.top < rect.y || this.right > rect.x + rect.height || this.bottom > rect.y + rect.height);
+    return !(this.x < rect.x || this.y < rect.y || this.x + this.width > rect.x + rect.height || this.y + this.height > rect.y + rect.height);
   }
 
   public intersectsRect(rect: SimpleRect) {
-    return (this.left <= rect.x + rect.width && rect.x <= this.right && this.top <= rect.y + rect.height && rect.y <= this.bottom);
+    return (this.x <= rect.x + rect.width && rect.x <= this.x + this.width && this.y <= rect.y + rect.height && rect.y <= this.y + this.height);
   }
 
   public translateX(x: number) {
