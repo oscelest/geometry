@@ -1,4 +1,5 @@
 import {SimplePoint} from "./Point";
+import {TransformationOrigin} from "../enums";
 
 export default class Rect {
 
@@ -58,8 +59,28 @@ export default class Rect {
     return this.fromSimpleRect(source).translateByPoint(target);
   }
 
-  public static scale(source: SimpleRect, decimal_percent: number) {
-    return this.fromSimpleRect(source).scale(decimal_percent);
+  public static expandWidth(source: SimpleRect, width: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.fromSimpleRect(source).expandWidth(width, origin);
+  }
+
+  public static expandHeight(source: SimpleRect, height: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.fromSimpleRect(source).expandHeight(height, origin);
+  }
+
+  public static expand(source: SimpleRect, width: number, height: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.fromSimpleRect(source).expand(width, height, origin);
+  }
+
+  public static scaleWidth(source: SimpleRect, width_decimal_percent: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.fromSimpleRect(source).scaleWidth(width_decimal_percent, origin);
+  }
+
+  public static scaleHeight(source: SimpleRect, height_decimal_percent: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.fromSimpleRect(source).scaleHeight(height_decimal_percent, origin);
+  }
+
+  public static scale(source: SimpleRect, width_decimal_percent: number, height_decimal_percent: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.fromSimpleRect(source).scale(width_decimal_percent, height_decimal_percent, origin);
   }
 
   public static union(...rect_list: SimpleRect[]) {
@@ -113,15 +134,51 @@ export default class Rect {
     return this.translateByCoords(point.x, point.y);
   }
 
-  public scale(decimal_percent: number) {
-    decimal_percent = Math.max(0, decimal_percent);
-    const dx = this.x * decimal_percent * 0.5;
-    const dy = this.y * decimal_percent * 0.5;
-    this.x += dx / 2;
-    this.y += dy / 2;
-    this.width -= dx;
-    this.height -= dy;
+  public expandWidth(width: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    if (origin === TransformationOrigin.TOP_LEFT || origin === TransformationOrigin.LEFT || origin === TransformationOrigin.BOTTOM_LEFT) {
+      this.width += width;
+    }
+    else if (origin === TransformationOrigin.TOP_RIGHT || origin === TransformationOrigin.RIGHT || origin === TransformationOrigin.BOTTOM_RIGHT) {
+      this.x += width;
+      this.width += width;
+    }
+    else {
+      this.x -= width / 2;
+      this.width += width / 2;
+    }
     return this;
+  }
+
+  public expandHeight(height: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    if (origin === TransformationOrigin.BOTTOM_LEFT || origin === TransformationOrigin.BOTTOM || origin === TransformationOrigin.BOTTOM_RIGHT) {
+      this.y -= height;
+      this.height += height;
+    }
+    else if (origin === TransformationOrigin.TOP_LEFT || origin === TransformationOrigin.TOP || origin === TransformationOrigin.TOP_RIGHT) {
+      this.height += height;
+    }
+    else {
+      this.y -= height / 2;
+      this.height += height / 2;
+    }
+
+    return this;
+  }
+
+  public expand(width: number, height: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.expandWidth(width, origin).expandHeight(height, origin);
+  }
+
+  public scaleWidth(decimal_percent: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.expandWidth(this.width * Math.max(0, decimal_percent), origin);
+  }
+
+  public scaleHeight(decimal_percent: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.expandHeight(this.width * Math.max(0, decimal_percent), origin);
+  }
+
+  public scale(width_decimal_percent: number, height_decimal_percent: number, origin: TransformationOrigin = TransformationOrigin.CENTER) {
+    return this.scaleWidth(width_decimal_percent, origin).scaleHeight(height_decimal_percent, origin);
   }
 
   public union(...rect_list: SimpleRect[]) {
