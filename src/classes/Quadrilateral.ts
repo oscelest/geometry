@@ -1,5 +1,4 @@
-import Point, {SimplePoint} from "./Point";
-import Triangle from "./Triangle";
+import {Point, SimplePoint, Triangle} from "./index";
 
 export default class Quadrilateral {
 
@@ -15,28 +14,28 @@ export default class Quadrilateral {
     this.d = Point.fromSimplePoint(d);
   }
 
-  public static fromSimpleQuadrilateral(source: SimpleQuadrilateral) {
+  public static fromSimpleQuadrilateral(source: SimpleQuadrilateral): Quadrilateral {
     return new this(source.top_left, source.top_right, source.bottom_left, source.bottom_right);
   }
 
-  public static getArea(source: SimpleQuadrilateral) {
+  public static getArea(source: SimpleQuadrilateral): number {
     return this.fromSimpleQuadrilateral(source).getArea();
   }
 
-  public static containsPoint(source: SimpleQuadrilateral, target: SimplePoint) {
+  public static containsPoint(source: SimpleQuadrilateral, target: SimplePoint): boolean {
     return this.fromSimpleQuadrilateral(source).containsPoint(target);
   }
 
-  public clone() {
+  public clone(): Quadrilateral {
     return new Quadrilateral(this.a, this.b, this.c, this.d);
   }
 
-  public getArea() {
+  public getArea(): number {
     return new Triangle(this.a, this.b, this.d).getArea() + new Triangle(this.a, this.c, this.d).getArea();
   }
 
-  public containsPoint(point: SimplePoint) {
-    const point_area = Math.round(
+  public containsPoint(point: SimplePoint): boolean {
+    const point_area: number = Math.round(
       new Triangle(point, this.a, this.b).getArea() +
       new Triangle(point, this.a, this.c).getArea() +
       new Triangle(point, this.b, this.d).getArea() +

@@ -1,5 +1,4 @@
-import Point, {SimplePoint} from "./Point";
-import Line from "./Line";
+import {Point, SimplePoint, Line} from "./index";
 
 export default class Triangle {
 
@@ -13,80 +12,80 @@ export default class Triangle {
     this.c = Point.fromSimplePoint(c);
   }
 
-  public static fromSimpleTriangle(source: SimpleTriangle) {
+  public static fromSimpleTriangle(source: SimpleTriangle): Triangle {
     return new Triangle(source.a, source.b, source.c);
   }
 
-  public static getAngleAInRadians(source: SimpleTriangle) {
-    return this.fromSimpleTriangle(source).getAngleAInRadians();
-  }
-
-  public static getAngleAInDegrees(source: SimpleTriangle) {
-    return this.fromSimpleTriangle(source).getAngleAInDegrees();
-  }
-
-  public static getAngleBInRadians(source: SimpleTriangle) {
-    return this.fromSimpleTriangle(source).getAngleBInRadians();
-  }
-
-  public static getAngleBInDegrees(source: SimpleTriangle) {
-    return this.fromSimpleTriangle(source).getAngleBInDegrees();
-  }
-
-  public static getAngleCInRadians(source: SimpleTriangle) {
-    return this.fromSimpleTriangle(source).getAngleCInRadians();
-  }
-
-  public static getAngleCInDegrees(source: SimpleTriangle) {
-    return this.fromSimpleTriangle(source).getAngleCInDegrees();
-  }
-
-  public static getArea(source: SimpleTriangle) {
-    return this.fromSimpleTriangle(source).getArea();
-  }
-
-  public static getHeight(source: SimpleTriangle) {
+  public static getHeight(source: SimpleTriangle): number {
     return this.fromSimpleTriangle(source).getHeight();
   }
 
-  public clone() {
+  public static getArea(source: SimpleTriangle): number {
+    return this.fromSimpleTriangle(source).getArea();
+  }
+
+  public static getAngleAInRadians(source: SimpleTriangle): number {
+    return this.fromSimpleTriangle(source).getAngleAInRadians();
+  }
+
+  public static getAngleAInDegrees(source: SimpleTriangle): number {
+    return this.fromSimpleTriangle(source).getAngleAInDegrees();
+  }
+
+  public static getAngleBInRadians(source: SimpleTriangle): number {
+    return this.fromSimpleTriangle(source).getAngleBInRadians();
+  }
+
+  public static getAngleBInDegrees(source: SimpleTriangle): number {
+    return this.fromSimpleTriangle(source).getAngleBInDegrees();
+  }
+
+  public static getAngleCInRadians(source: SimpleTriangle): number {
+    return this.fromSimpleTriangle(source).getAngleCInRadians();
+  }
+
+  public static getAngleCInDegrees(source: SimpleTriangle): number {
+    return this.fromSimpleTriangle(source).getAngleCInDegrees();
+  }
+
+  public clone(): Triangle {
     return new Triangle(this.a, this.b, this.c);
   }
 
-  public getAngleAInRadians() {
-    return Math.abs(Math.atan2(this.c.y - this.a.y, this.c.x - this.a.x) - Math.atan2(this.b.y - this.a.y, this.b.x - this.a.x));
+  public getHeight(): number {
+    return 2 * this.getArea() / new Line(this.b, this.c).getLength();
   }
 
-  public getAngleAInDegrees() {
-    return this.getAngleAInRadians() * 180 / Math.PI;
-  }
-
-  public getAngleBInRadians() {
-    return Math.abs(Math.atan2(this.a.y - this.b.y, this.a.x - this.b.x) - Math.atan2(this.c.y - this.b.y, this.c.x - this.b.x));
-  }
-
-  public getAngleBInDegrees() {
-    return this.getAngleBInRadians() * 180 / Math.PI;
-  }
-
-  public getAngleCInRadians() {
-    return Math.abs(Math.atan2(this.a.y - this.c.y, this.a.x - this.c.x) - Math.atan2(this.b.y - this.c.y, this.b.x - this.c.x));
-  }
-
-  public getAngleCInDegrees() {
-    return this.getAngleCInRadians() * 180 / Math.PI;
-  }
-
-  public getArea() {
-    const a = new Line(this.a, this.b).getLength();
-    const b = new Line(this.b, this.c).getLength();
-    const c = new Line(this.c, this.a).getLength();
-    const s = (a + b + c) / 2;
+  public getArea(): number {
+    const a: number = new Line(this.a, this.b).getLength();
+    const b: number = new Line(this.b, this.c).getLength();
+    const c: number = new Line(this.c, this.a).getLength();
+    const s: number = (a + b + c) / 2;
     return Math.sqrt(s * (s - a) * (s - b) * (s - c));
   }
 
-  public getHeight() {
-    return 2 * this.getArea() / new Line(this.b, this.c).getLength();
+  public getAngleAInRadians(): number {
+    return Math.abs(Math.atan2(this.c.y - this.a.y, this.c.x - this.a.x) - Math.atan2(this.b.y - this.a.y, this.b.x - this.a.x));
+  }
+
+  public getAngleAInDegrees(): number {
+    return this.getAngleAInRadians() * 180 / Math.PI;
+  }
+
+  public getAngleBInRadians(): number {
+    return Math.abs(Math.atan2(this.a.y - this.b.y, this.a.x - this.b.x) - Math.atan2(this.c.y - this.b.y, this.c.x - this.b.x));
+  }
+
+  public getAngleBInDegrees(): number {
+    return this.getAngleBInRadians() * 180 / Math.PI;
+  }
+
+  public getAngleCInRadians(): number {
+    return Math.abs(Math.atan2(this.a.y - this.c.y, this.a.x - this.c.x) - Math.atan2(this.b.y - this.c.y, this.b.x - this.c.x));
+  }
+
+  public getAngleCInDegrees(): number {
+    return this.getAngleCInRadians() * 180 / Math.PI;
   }
 }
 

@@ -1,4 +1,4 @@
-import Point, {SimplePoint} from "./Point";
+import {Point, SimplePoint} from "./index";
 
 export default class Circle {
 
@@ -10,35 +10,35 @@ export default class Circle {
     this.radius = radius;
   }
 
-  public static fromSimpleCircle(source: SimpleCircle) {
+  public static fromSimpleCircle(source: SimpleCircle): Circle {
     return new Circle(source.origin, source.radius);
   }
 
-  public static getDiameter(source: SimpleCircle) {
+  public static getDiameter(source: SimpleCircle): number {
     return this.fromSimpleCircle(source).getDiameter();
   }
 
-  public static getArea(source: SimpleCircle) {
+  public static getArea(source: SimpleCircle): number {
     return this.fromSimpleCircle(source).getArea();
   }
 
-  public static containsPoint(source: SimpleCircle, target: SimplePoint) {
+  public static containsPoint(source: SimpleCircle, target: SimplePoint): boolean {
     return this.fromSimpleCircle(source).containsPoint(target);
   }
 
-  public clone() {
+  public clone(): Circle {
     return new Circle(this.origin, this.radius);
   }
 
-  public getDiameter() {
+  public getDiameter(): number {
     return this.radius * 2;
   }
 
-  public getArea() {
+  public getArea(): number {
     return this.radius * this.radius * Math.PI;
   }
 
-  public containsPoint(point: SimplePoint) {
+  public containsPoint(point: SimplePoint): boolean {
     return this.origin.getDistanceToPoint(point) <= this.radius;
   }
 }
