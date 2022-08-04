@@ -1,7 +1,7 @@
 {
   "name": "@noxy/geometry",
   "author": "oscelest",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A library with basic geometric classes and methods.",
   "license": "MIT",
   "repository": {
