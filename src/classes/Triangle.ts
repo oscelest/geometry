@@ -1,4 +1,5 @@
-import {Point, SimplePoint, Line} from "./index";
+import Point, {SimplePoint} from "./Point";
+import Line from "./Line";
 
 export default class Triangle {
 

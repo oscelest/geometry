@@ -1,5 +1,5 @@
-import {Point, SimplePoint} from "./index";
 import {TransformationOrigin} from "../enums";
+import Point, {SimplePoint} from "./Point";
 
 export default class Rect {
 

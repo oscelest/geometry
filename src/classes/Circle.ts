@@ -1,4 +1,4 @@
-import {Point, SimplePoint} from "./index";
+import Point, {SimplePoint} from "./Point";
 
 export default class Circle {
 

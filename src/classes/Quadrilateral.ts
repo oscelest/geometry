@@ -1,4 +1,5 @@
-import {Point, SimplePoint, Triangle} from "./index";
+import Point, {SimplePoint} from "./Point";
+import Triangle from "./Triangle";
 
 export default class Quadrilateral {
 
