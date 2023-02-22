@@ -24,15 +24,15 @@ export default class Rect {
     return this.y + this.height;
   }
   
-  constructor(x: number, y: number, width: number, height: number) {
+  constructor(x: number = 0, y: number = 0, width: number = 0, height: number = 0) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
   }
   
-  public static fromSimpleRect(source: SimpleRect): Rect {
-    return new this(source.x, source.y, source.width, source.height);
+  public static fromSimpleRect(source?: SimpleRect): Rect {
+    return new this(source?.x ?? 0, source?.y ?? 0, source?.width ?? 0, source?.height ?? 0);
   }
   
   public static fromPoints(p1: SimplePoint, p2: SimplePoint): Rect {
