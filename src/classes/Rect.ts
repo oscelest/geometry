@@ -139,7 +139,7 @@ export default class Rect {
   }
   
   public containsY(y: number): boolean {
-    return this.bottom <= y && y <= this.top;
+    return this.top <= y && y <= this.bottom;
   }
   
   public containsPoint(point: SimplePoint): boolean {
