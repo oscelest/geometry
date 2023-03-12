@@ -1,28 +1,28 @@
 {
-  "name": "@noxy/geometry",
-  "author": "oscelest",
-  "version": "0.2.6",
-  "description": "A library with basic geometric classes and methods.",
-  "license": "MIT",
-  "repository": {
+  "name":            "@noxy/geometry",
+  "author":          "oscelest",
+  "version":         "0.2.6",
+  "description":     "A library with basic geometric classes and methods.",
+  "license":         "MIT",
+  "repository":      {
     "type": "git",
-    "url": "git@github.com:oscelest/geometry.git"
+    "url":  "git@github.com:oscelest/geometry.git"
   },
-  "bugs": {
+  "bugs":            {
     "url": "https://github.com/oscelest/geometry/issues"
   },
-  "publishConfig": {
+  "publishConfig":   {
     "access": "public"
   },
-  "main": "dist/cjs/index.js",
-  "types": "dist/types/index.d.ts",
-  "module": "dist/esm/index.js",
-  "umd": "dist/umd/index.js",
-  "files": [
+  "main":            "dist/cjs/index.js",
+  "types":           "dist/types/index.d.ts",
+  "module":          "dist/esm/index.js",
+  "umd":             "dist/umd/index.js",
+  "files":           [
     "dist"
   ],
-  "scripts": {
-    "build": "rollup -c",
+  "scripts":         {
+    "build":  "rollup -c",
     "update": "npx npm-check-updates -u && npm install"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "@rollup/plugin-node-resolve":      "^15.0.1",
     "@rollup/plugin-terser":            "^0.4.0",
     "@rollup/plugin-typescript":        "^11.0.0",
-    "rollup":                           "^3.17.3",
+    "rollup":                           "^3.19.1",
     "rollup-plugin-dts":                "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss":            "^4.0.2",
